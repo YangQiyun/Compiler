@@ -17,6 +17,7 @@ public class DFA {
     //DFaNode 和 Closure一一对应
     private List<DFaNode> dFaNodes=new ArrayList<>();
     private List<Closure> closures=new ArrayList<>();
+
     /**
      *闭包内部类
      * 使用hashset来存储NFA结点得编号，表示一个闭包内得NFA结点
@@ -43,6 +44,7 @@ public class DFA {
     public DFA(NFaPair headNode) throws DFaException {
         this.headNode=headNode;
         dfa();
+        clearNFA();
     }
 
     private void dfa() throws DFaException {
@@ -144,7 +146,31 @@ public class DFA {
         return result;
     }
 
-
+    /**
+     * 内部函数，将NFA的所有结点回收
+     *
+     */
+    private void clearNFA(){
+         Set<NFaNode> clearNFA=new HashSet<>();
+         clearNFA.add(headNode.getStart());
+         Queue<NFaNode> queue=new LinkedTransferQueue<>();
+         queue.add(headNode.getStart());
+         NFaNode nFaNode;
+         while (!queue.isEmpty()){
+             nFaNode=queue.poll();
+             if(nFaNode.getNfaNodes()!=null)
+             for (NFaNode nextNode:nFaNode.getNfaNodes()){
+                 if(!clearNFA.contains(nextNode)){
+                     clearNFA.add(nextNode);
+                     queue.add(nextNode);
+                 }
+             }
+         }
+         Iterator<NFaNode> iterator=clearNFA.iterator();
+         while (iterator.hasNext()){
+             AllManager.nFaNodeManager.deleteNfaNode(iterator.next());
+         }
+    }
 
     /**
      * 内部函数，获取所有的终结符，自动除去-1这个空集元素，然后存储在一个hashSet中,广度优先遍历将所有存在得除了空集得边加入set中
@@ -183,11 +209,20 @@ public class DFA {
             finalityArray.add(FinalityIterator.next());
     }
 
+    public List<DFaNode> getdFaNodes() {
+        return dFaNodes;
+    }
+
+    public List<Integer> getFinalityArray() {
+        return finalityArray;
+    }
+
     //测试打印使用
     public void print(){
         DFaNode head=dFaNodes.get(0);
         Queue<DFaNode> queue=new LinkedTransferQueue<>();
         queue.add(head);
+        head.isVisit=true;
         while (!queue.isEmpty()){
             DFaNode dFaNode=queue.poll();
             if (dFaNode.isIncludeEnd)

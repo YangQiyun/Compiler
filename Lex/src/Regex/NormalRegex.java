@@ -3,6 +3,7 @@ package Regex;
 
 import DFA.DFA;
 import NFA.NFA;
+import ODFA.ODFA;
 import mException.ShuntingException;
 import Lex.AllManager;
 import Node.*;
@@ -132,7 +133,9 @@ public class NormalRegex {
             NFA nfa=new NFA(abstractGrammarTree.getHeadNode());
             //nfa.getResultPair().print();
             DFA dfa=new DFA(nfa.getResultPair());
-            dfa.print();
+            //dfa.print();
+            ODFA odfa=new ODFA(dfa.getdFaNodes(),dfa.getFinalityArray());
+            odfa.print();
         } catch (ShuntingException e) {
             e.printStackTrace();
         } catch (Exception e) {
