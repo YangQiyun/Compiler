@@ -1,5 +1,6 @@
 package Lex;
 
+import DFA.DFaNodeManager;
 import NFA.NFaNodeManager;
 import Regex.OperatorManager;
 
@@ -14,9 +15,11 @@ public class AllManager {
 
     public static NFaNodeManager nFaNodeManager;
     public static OperatorManager operatorManager=new OperatorManager(true);
+    public static DFaNodeManager dFaNodeManager;
 
     static {
         try {
+            dFaNodeManager = new DFaNodeManager();
             nFaNodeManager = new NFaNodeManager();
         } catch (Exception e) {
             e.printStackTrace();

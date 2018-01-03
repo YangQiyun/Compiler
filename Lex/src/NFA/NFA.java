@@ -8,6 +8,7 @@ import java.util.Stack;
 /**
  * NFA 类
  * 运用Thompson根据已有的抽象语法树构建一个完整的NFA
+ * 还有优化空间 对于关系闭包的相等判断
  *
  * @author Mind
  * @version 1.0

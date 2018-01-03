@@ -2,27 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65d086e4-37f3-49a3-b097-ffb3b5951325" name="Default" comment="NFA finish">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/Lex.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Exception/NFaException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Exception/ShuntingException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/LexReader.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/NFA/NFA.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/NFA/NFaNode.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/NFA/NFaNodeManager.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/NFA/NFaPair.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/CatNode.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/CharacterNode.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/ClassifierNode.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/LeftBracket.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/Node.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/OrNode.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Node/RightBracket.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Regex/OperatorManager.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Regex/Shunting_yard.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/Regex/abstractGrammarTree.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/DFA/DFA.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/DFA/DFaNode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/DFA/DFaNodeManager.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Lex/src/mException/DFaException.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Lex/src/Lex/AllManager.java" afterPath="$PROJECT_DIR$/Lex/src/Lex/AllManager.java" />
+      <change beforePath="$PROJECT_DIR$/Lex/src/NFA/NFA.java" afterPath="$PROJECT_DIR$/Lex/src/NFA/NFA.java" />
+      <change beforePath="$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java" afterPath="$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/NFA/NFA.class" afterPath="$PROJECT_DIR$/out/production/Lex/NFA/NFA.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/NFA/NFaNode.class" afterPath="$PROJECT_DIR$/out/production/Lex/NFA/NFaNode.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/NFA/NFaNodeManager.class" afterPath="$PROJECT_DIR$/out/production/Lex/NFA/NFaNodeManager.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/NFA/NFaPair.class" afterPath="$PROJECT_DIR$/out/production/Lex/NFA/NFaPair.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/Node/Node$TYPE.class" afterPath="$PROJECT_DIR$/out/production/Lex/Node/Node$TYPE.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/Node/Node.class" afterPath="$PROJECT_DIR$/out/production/Lex/Node/Node.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/Regex/NormalRegex.class" afterPath="$PROJECT_DIR$/out/production/Lex/Regex/NormalRegex.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/Regex/Shunting_yard.class" afterPath="$PROJECT_DIR$/out/production/Lex/Regex/Shunting_yard.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lex/Regex/abstractGrammarTree.class" afterPath="$PROJECT_DIR$/out/production/Lex/Regex/abstractGrammarTree.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -35,84 +31,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="abstractGrammarTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lex/src/Regex/abstractGrammarTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1014">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormalRegex.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NormalRegex.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3186">
-              <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
+            <state relative-caret-position="548">
+              <caret line="121" column="58" lean-forward="false" selection-start-line="121" selection-start-column="58" selection-end-line="121" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OperatorManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lex/src/Regex/OperatorManager.java">
+      <file leaf-file-name="DFA.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lex/src/DFA/DFA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Shunting_yard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lex/src/Regex/Shunting_yard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+            <state relative-caret-position="-76">
+              <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
               <folding>
-                <element signature="e#3394#3395#0" expanded="true" />
-                <element signature="e#3423#3424#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lex/src/Lex/AllManager.java">
+      <file leaf-file-name="NFA.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
+            <state relative-caret-position="-2832">
+              <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LexReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lex/src/Lex/LexReader.java">
+      <file leaf-file-name="DFaNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lex/src/DFA/DFaNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="184">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#970#971#0" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1039#1040#0" expanded="true" />
+                <element signature="e#1070#1071#0" expanded="true" />
+                <element signature="e#1108#1109#0" expanded="true" />
+                <element signature="e#1145#1146#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NFaNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="16" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NFaException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lex/src/mException/NFaException.java">
+      <file leaf-file-name="NFaPair.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaPair.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShuntingException.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Lex/src/mException/ShuntingException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="5" lean-forward="false" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+            <state relative-caret-position="68">
+              <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -130,6 +113,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>lines</find>
+      <find>add</find>
+      <find>isIncludeEnd</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,15 +154,18 @@
         <option value="$PROJECT_DIR$/Lex/src/Regex/AllManager.java" />
         <option value="$PROJECT_DIR$/Lex/src/AllManager.java" />
         <option value="$PROJECT_DIR$/Lex/src/Lex/LexReader.java" />
-        <option value="$PROJECT_DIR$/Lex/src/NFA/NFA.java" />
         <option value="$PROJECT_DIR$/Lex/src/NFA/NFaNodeManager.java" />
         <option value="$PROJECT_DIR$/Lex/src/NFA/NFaNode.java" />
         <option value="$PROJECT_DIR$/Lex/src/NFA/NFaPair.java" />
         <option value="$PROJECT_DIR$/Lex/src/Node/Node.java" />
-        <option value="$PROJECT_DIR$/Lex/src/Lex/AllManager.java" />
         <option value="$PROJECT_DIR$/Lex/src/Regex/abstractGrammarTree.java" />
         <option value="$PROJECT_DIR$/Lex/src/Regex/OperatorManager.java" />
         <option value="$PROJECT_DIR$/Lex/src/Regex/Shunting_yard.java" />
+        <option value="$PROJECT_DIR$/Lex/src/DFA/DFaNodeManager.java" />
+        <option value="$PROJECT_DIR$/Lex/src/Lex/AllManager.java" />
+        <option value="$PROJECT_DIR$/Lex/src/NFA/NFA.java" />
+        <option value="$PROJECT_DIR$/Lex/src/DFA/DFaNode.java" />
+        <option value="$PROJECT_DIR$/Lex/src/DFA/DFA.java" />
         <option value="$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java" />
       </list>
     </option>
@@ -188,9 +176,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="588" />
-    <option name="y" value="82" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="727" />
+    <option name="y" value="-29" />
     <option name="width" value="1335" />
     <option name="height" value="876" />
   </component>
@@ -212,10 +200,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,10 +221,53 @@
               <item name="Lex" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="DFA" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mException" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NFA" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Node" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="Lex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Regex" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,6 +278,12 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IntelliJProject\Compiler\Lex\src\mException" />
+      <recent name="E:\IntelliJProject\Compiler\Lex\src\DFA" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -456,14 +492,15 @@
       <workItem from="1514686573570" duration="23209000" />
       <workItem from="1514738616430" duration="2083000" />
       <workItem from="1514773876574" duration="14499000" />
+      <workItem from="1514884155750" duration="16281000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79630000" />
+    <option name="totallyTimeSpent" value="95911000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="588" y="82" width="1335" height="876" extended-state="0" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -474,24 +511,24 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3924222" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18770581" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22323462" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.153125" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28246012" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="756" y="195" width="377" height="703" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2515625" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="756" y="195" width="377" height="703" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24562937" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17124039" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,26 +543,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="24" />
+      <option name="time" value="41" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2945#2946#0" expanded="true" />
-            <element signature="e#2978#2979#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/mRegex/Shunting_yard.java" />
-    <entry file="file://$PROJECT_DIR$/Lex/src/mRegex/abstractNode.java" />
-    <entry file="file://$PROJECT_DIR$/Lex/src/mRegex/abstractGrammarTree.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -635,13 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/concurrent/LinkedTransferQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="50" column="67" lean-forward="true" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -729,21 +744,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lex/src/mRegex/abstractNode.java" />
     <entry file="file://$PROJECT_DIR$/Lex/src/mRegex/abstractGrammarTree.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="738" column="26" lean-forward="false" selection-start-line="738" selection-start-column="26" selection-end-line="738" selection-end-column="26" />
-          <folding>
-            <element signature="e#9482#9483#0" expanded="false" />
-            <element signature="e#9528#9529#0" expanded="false" />
-            <element signature="e#10902#10903#0" expanded="false" />
-            <element signature="e#10948#10949#0" expanded="false" />
-            <element signature="e#35161#35162#0" expanded="false" />
-            <element signature="e#35199#35200#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/Character.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="685">
@@ -759,70 +759,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8802">
-          <caret line="420" column="4" lean-forward="false" selection-start-line="420" selection-start-column="4" selection-end-line="426" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="33" column="5" lean-forward="false" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding>
-            <element signature="e#572#573#0" expanded="true" />
-            <element signature="e#610#611#0" expanded="true" />
-            <element signature="e#1382#1383#0" expanded="true" />
-            <element signature="e#1429#1430#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1494#1495#0" expanded="true" />
-            <element signature="e#1536#1537#0" expanded="true" />
-            <element signature="e#1567#1568#0" expanded="true" />
-            <element signature="e#1606#1607#0" expanded="true" />
-            <element signature="e#1643#1644#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaPair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3327">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="13" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2945#2946#0" expanded="true" />
-            <element signature="e#2978#2979#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lex/src/Node/ClassifierNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1134">
           <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaNodeManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1119">
-          <caret line="64" column="3" lean-forward="true" selection-start-line="64" selection-start-column="3" selection-end-line="68" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1645#1646#0" expanded="true" />
-            <element signature="e#1686#1687#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -852,18 +793,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lex/src/Regex/Shunting_yard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding>
-            <element signature="e#3394#3395#0" expanded="true" />
-            <element signature="e#3423#3424#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3105">
+          <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lex/src/Regex/OperatorManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
+        <state relative-caret-position="378">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
@@ -871,24 +809,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lex/src/Regex/abstractGrammarTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1014">
+        <state relative-caret-position="0">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3186">
-          <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lex/src/Lex/AllManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -913,6 +835,133 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="5" lean-forward="false" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/mException/DFaException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaNodeManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="71" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1645#1646#0" expanded="true" />
+            <element signature="e#1686#1687#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/DFA/DFaNodeManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="42" column="42" lean-forward="false" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1553#1554#0" expanded="true" />
+            <element signature="e#1594#1595#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/Lex/AllManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaPair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/concurrent/LinkedTransferQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="1145" column="0" lean-forward="false" selection-start-line="1145" selection-start-column="0" selection-end-line="1145" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="833" column="0" lean-forward="false" selection-start-line="833" selection-start-column="0" selection-end-line="833" selection-end-column="0" />
+          <folding>
+            <element signature="e#30716#30717#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFaNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="16" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/NFA/NFA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2832">
+          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="1009" column="26" lean-forward="false" selection-start-line="1009" selection-start-column="26" selection-end-line="1009" selection-end-column="26" />
+          <folding>
+            <element signature="e#37816#37817#0" expanded="true" />
+            <element signature="e#37859#37860#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/DFA/DFaNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#970#971#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1039#1040#0" expanded="true" />
+            <element signature="e#1070#1071#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+            <element signature="e#1145#1146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/DFA/DFA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lex/src/Regex/NormalRegex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="121" column="58" lean-forward="false" selection-start-line="121" selection-start-column="58" selection-end-line="121" selection-end-column="58" />
           <folding />
         </state>
       </provider>

@@ -1,6 +1,7 @@
 package Regex;
 
 
+import DFA.DFA;
 import NFA.NFA;
 import mException.ShuntingException;
 import Lex.AllManager;
@@ -118,7 +119,7 @@ public class NormalRegex {
         //(a*|b*)*
         //(a|b)*abb
         try {
-        NormalRegex normalRegex=new NormalRegex("(a*|b*)*");
+        NormalRegex normalRegex=new NormalRegex("(a|b)*abb");
         normalRegex.print();
         System.out.println();
         Shunting_yard shunting_yard= null;
@@ -129,7 +130,9 @@ public class NormalRegex {
             abstractGrammarTree abstractGrammarTree=new abstractGrammarTree(shunting_yard.getResult());
             abstractGrammarTree.WidthPrint();
             NFA nfa=new NFA(abstractGrammarTree.getHeadNode());
-            nfa.getResultPair().print();
+            //nfa.getResultPair().print();
+            DFA dfa=new DFA(nfa.getResultPair());
+            dfa.print();
         } catch (ShuntingException e) {
             e.printStackTrace();
         } catch (Exception e) {
