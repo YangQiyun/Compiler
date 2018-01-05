@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class NFaNode {
 
-    //
     //直到需要使用时才申请结点避免占空间
     private List<Integer> edge;
     private List<NFaNode> nfaNodes;

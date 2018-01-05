@@ -2,7 +2,7 @@ package Regex;
 
 
 import DFA.DFA;
-import NFA.NFA;
+import NFA.*;
 import ODFA.ODFA;
 import mException.ShuntingException;
 import Lex.AllManager;
@@ -120,9 +120,10 @@ public class NormalRegex {
         //(a*|b*)*
         //(a|b)*abb
         try {
+/*
         NormalRegex normalRegex=new NormalRegex("(a|b)*abb");
-        normalRegex.print();
-        System.out.println();
+        //normalRegex.print();
+       // System.out.println();
         Shunting_yard shunting_yard= null;
 
             shunting_yard = new Shunting_yard(normalRegex.getNodeList(), AllManager.operatorManager);
@@ -136,6 +137,37 @@ public class NormalRegex {
             //dfa.print();
             ODFA odfa=new ODFA(dfa.getdFaNodes(),dfa.getFinalityArray());
             odfa.print();
+*/
+            //表达式一
+            NormalRegex normalRegex1=new NormalRegex("a");
+            Shunting_yard shunting_yard1=new Shunting_yard(normalRegex1.getNodeList(),AllManager.operatorManager);
+            abstractGrammarTree abstractGrammarTree1=new abstractGrammarTree(shunting_yard1.getResult());
+            NFA nfa1=new NFA(abstractGrammarTree1.getHeadNode());
+            nfa1.SetEndLevel(1);
+
+
+            //表达式二
+            NormalRegex normalRegex2=new NormalRegex("abb");
+            Shunting_yard shunting_yard2=new Shunting_yard(normalRegex2.getNodeList(),AllManager.operatorManager);
+            abstractGrammarTree abstractGrammarTree2=new abstractGrammarTree(shunting_yard2.getResult());
+            NFA nfa2=new NFA(abstractGrammarTree2.getHeadNode());
+            nfa2.SetEndLevel(2);
+
+            //表达式三
+            NormalRegex normalRegex3=new NormalRegex("a*b+");
+            Shunting_yard shunting_yard3=new Shunting_yard(normalRegex3.getNodeList(),AllManager.operatorManager);
+            abstractGrammarTree abstractGrammarTree3=new abstractGrammarTree(shunting_yard3.getResult());
+            NFA nfa3=new NFA(abstractGrammarTree3.getHeadNode());
+            nfa3.SetEndLevel(3);
+
+            NFaPair[] nFaPairs={nfa1.getResultPair(),nfa2.getResultPair(),nfa3.getResultPair()};
+
+            DFA dfa1=new DFA(nFaPairs);
+           // dfa1.print();
+
+            ODFA odfa1=new ODFA(dfa1.getdFaNodes(),dfa1.getFinalityArray());
+
+            odfa1.print();
         } catch (ShuntingException e) {
             e.printStackTrace();
         } catch (Exception e) {

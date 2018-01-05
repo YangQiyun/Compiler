@@ -28,6 +28,8 @@ public class DFaNode {
 
     public boolean isVisit=false;
     public boolean isIncludeEnd=false;
+    //结束结点的等级，等级相当于书写正则表达式的行号，越前则等级越高，所以数值越小等级越大
+    private int endLevel=Integer.MAX_VALUE;
 
     public DFaNode(){
         identification=index++;
@@ -61,6 +63,14 @@ public class DFaNode {
 
     public int getIdentification() {
         return identification;
+    }
+
+    public int getEndLevel() {
+        return endLevel;
+    }
+
+    public void setEndLevel(int endLevel) {
+        this.endLevel = endLevel;
     }
 
     /**

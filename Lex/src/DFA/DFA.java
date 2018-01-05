@@ -5,15 +5,37 @@ import Lex.AllManager;
 import NFA.NFaNode;
 import NFA.NFaPair;
 import mException.DFaException;
+import mException.NFaException;
 
 
 import java.util.*;
 import java.util.concurrent.LinkedTransferQueue;
 
+/**
+ * DFA 类
+ * 运用子集构造法进行将NFA转换为DFA
+ *
+ * version 1.0的版本
+ * 只是针对一个单一的NFA图，只有一对开始和结束的NFA结点
+ *
+ * version 1.1的版本
+ * 加入了将多个NFA的图利用"|"运算符的规则合成一个拥有一个开始结点和多个结束结点对的NFA图
+ * 同时加入了总的table表的遍历信息
+ *
+ * @author Mind
+ * @version 1.1
+ */
 public class DFA {
 
-    private NFaPair headNode;
-    private List<Integer> finalityArray;
+    private NFaNode headNode;
+    //存储传参进来的各个正则表达式的pair，用来终结符的等级判断
+    private NFaPair[] nFaPairArray;
+    //当前NFA图中的存在的所有终结符的边
+    private List<Integer> finalityArray=new ArrayList<>();
+    //终结符和table表位置定位使用，为了可能节省的不存在的终结符在table表的位置，如果终结符都用到可能效率不会很高
+    private int[] finalInTable=new int[128];
+    //先鉴别出来的终结符排在table表的靠前位置
+    private int tableLocation=0;
     //DFaNode 和 Closure一一对应
     private List<DFaNode> dFaNodes=new ArrayList<>();
     private List<Closure> closures=new ArrayList<>();
@@ -27,6 +49,8 @@ public class DFA {
         ArrayList<NFaNode> nFaNodes=new ArrayList<>();
 
         boolean isIncludeEnd=false;
+        //如果包括了终结符则该属性有效,表示第几个正则表达式
+        int endLevel=Integer.MAX_VALUE;
 
         //判断两闭包是否一致
         public boolean isEqual(Closure anothreClosure){
@@ -41,8 +65,9 @@ public class DFA {
         }
     }
 
-    public DFA(NFaPair headNode) throws DFaException {
-        this.headNode=headNode;
+    public DFA(NFaPair[] nFaPairArray) throws DFaException, NFaException {
+        this.nFaPairArray=nFaPairArray;
+        this.headNode=mergeFaPair(nFaPairArray);
         dfa();
         clearNFA();
     }
@@ -52,8 +77,8 @@ public class DFA {
         getFinality(headNode);
         //添加第一个闭包和DFA结点
         Closure closure=new Closure();
-        closure.nFaNodes.add(headNode.getStart());
-        closure.numOfNode.add(headNode.getStart().getIdentification());
+        closure.nFaNodes.add(headNode);
+        closure.numOfNode.add(headNode.getIdentification());
         closure=getClosure(closure,-1,true);
         closures.add(closure);
         DFaNode dFaNode= AllManager.dFaNodeManager.newNfaNode();
@@ -66,6 +91,9 @@ public class DFA {
             //遍历所有的终结符边加入所有关系闭包
             for (int i = 0; i < finalityArray.size(); ++i) {
                 Closure resultClosure=getClosure(currentClosure,finalityArray.get(i),false);
+                //如果是空的直接跳过
+                if (resultClosure.numOfNode.size()==0)
+                    continue;
                 //判断是否存在过相应的闭包
                 int isExist=0;
                 for(;isExist<closures.size();++isExist){
@@ -76,11 +104,24 @@ public class DFA {
                 if(isExist==closures.size()){
                     closures.add(resultClosure);
                     DFaNode newDFaNode=AllManager.dFaNodeManager.newNfaNode();
+                    newDFaNode.setEndLevel(resultClosure.endLevel);
                     dFaNodes.get(pos).add((char)(int)finalityArray.get(i),newDFaNode);
                     dFaNodes.add(newDFaNode);
                     if (resultClosure.isIncludeEnd)
                         newDFaNode.isIncludeEnd=true;
                 }else {//重复的闭包结果集
+                    int index=0;
+                    boolean need=true;
+                    if (dFaNodes.get(pos).getEdge()!=null)
+                    for (int edge=0;edge<dFaNodes.get(pos).getEdge().size();edge++){
+                        if (dFaNodes.get(pos).getEdge().get(edge)==(char)(int)finalityArray.get(i)){
+                            if (dFaNodes.get(pos).getDfaNodes().get(edge)==dFaNodes.get(isExist)){
+                                need=false;
+                                break;
+                            }
+                        }
+                    }
+                    if (need)
                     dFaNodes.get(pos).add((char)(int)finalityArray.get(i),dFaNodes.get(isExist));
                 }
             }
@@ -105,8 +146,8 @@ public class DFA {
         Closure result=new Closure();
         Queue<NFaNode> queue=new LinkedTransferQueue<>();
         if (forhead){
-            result.numOfNode.add(headNode.getStart().getIdentification());
-            result.nFaNodes.add(headNode.getStart());
+            result.numOfNode.add(headNode.getIdentification());
+            result.nFaNodes.add(headNode);
         }
 
         //先获取终结符边的下一个结点，这一步可以优化进行判断闭包集是否相同,如果确定是新的再进行寻找ε的闭包
@@ -116,8 +157,13 @@ public class DFA {
                     if(nFaNode.getEdge().get(i)==edge){
                         NFaNode theNode=nFaNode.getNfaNodes().get(i);
                         queue.add(theNode);
-                        if(theNode==headNode.getEnd())
-                            result.isIncludeEnd=true;
+                        //是否包含终结符边，如果存在更新信息，包括了标记还有终结符的等级
+                        for (NFaPair pair:nFaPairArray){
+                            if (theNode==pair.getEnd()){
+                                result.isIncludeEnd=true;
+                                result.endLevel=pair.getEndLevel()<result.endLevel?pair.getEndLevel():result.endLevel;
+                            }
+                        }
                         result.nFaNodes.add(theNode);
                         result.numOfNode.add(theNode.getIdentification());
                     }
@@ -136,8 +182,13 @@ public class DFA {
                         queue.add(nFaNode.getNfaNodes().get(i));
                         result.numOfNode.add(nFaNode.getNfaNodes().get(i).getIdentification());
                         result.nFaNodes.add(nFaNode.getNfaNodes().get(i));
-                        if(nFaNode.getNfaNodes().get(i)==headNode.getEnd())
-                            result.isIncludeEnd=true;
+                        //是否包含终结符边，如果存在更新信息，包括了标记还有终结符的等级
+                        for (NFaPair pair:nFaPairArray){
+                            if (nFaNode.getNfaNodes().get(i)==pair.getEnd()){
+                                result.isIncludeEnd=true;
+                                result.endLevel=pair.getEndLevel()<result.endLevel?pair.getEndLevel():result.endLevel;
+                            }
+                        }
                     }
                 }
             }
@@ -152,9 +203,9 @@ public class DFA {
      */
     private void clearNFA(){
          Set<NFaNode> clearNFA=new HashSet<>();
-         clearNFA.add(headNode.getStart());
+         clearNFA.add(headNode);
          Queue<NFaNode> queue=new LinkedTransferQueue<>();
-         queue.add(headNode.getStart());
+         queue.add(headNode);
          NFaNode nFaNode;
          while (!queue.isEmpty()){
              nFaNode=queue.poll();
@@ -173,40 +224,41 @@ public class DFA {
     }
 
     /**
-     * 内部函数，获取所有的终结符，自动除去-1这个空集元素，然后存储在一个hashSet中,广度优先遍历将所有存在得除了空集得边加入set中
+     * 内部函数，获取所有的终结符，自动除去-1这个空集元素，广度优先遍历将所有存在得除了空集得边判断该边
+     * 是否已经录入到finalInTable中，否则录入
      *
      * @param headNode NFA的头
      * @throws DFaException 根据逻辑需要抛出的错误，方便以后的定位修改
      */
-    private void getFinality(NFaPair headNode) throws DFaException {
+    private void getFinality(NFaNode headNode) throws DFaException {
 
         if(headNode==null)
             throw new DFaException("this is a null point of NFaPair");
 
-        Set<Integer> finalitySet=new HashSet<>();
-        NFaNode start=headNode.getStart();
         Queue<NFaNode> queue=new LinkedTransferQueue<>();
-        start.isVisit=true;
-        queue.add(start);
+        headNode.isVisit=true;
+        queue.add(headNode);
         NFaNode node;
         while (!queue.isEmpty()){
             node=queue.poll();
             if(node.edgeSize()!=0){
                 for (int i=0;i<node.edgeSize();i++) {
-                        if(node.getEdge().get(i)!=-1)
-                            finalitySet.add(node.getEdge().get(i));
-                      if(!node.getNfaNodes().get(i).isVisit){
+                    int currentEdge=node.getEdge().get(i);
+                    if(currentEdge!=-1) {
+                        //注意只有当终结符没有被录入时才进行
+                        if(finalInTable[currentEdge]==0){
+                            finalInTable[currentEdge]=tableLocation++;
+                            finalityArray.add(currentEdge);
+                        }
+
+                    }
+                    if(!node.getNfaNodes().get(i).isVisit){
                         queue.add(node.getNfaNodes().get(i));
                         node.getNfaNodes().get(i).isVisit=true;
                     }
-
                 }
             }
         }
-        Iterator<Integer> FinalityIterator=finalitySet.iterator();
-        finalityArray=new ArrayList<>(finalitySet.size());
-        while (FinalityIterator.hasNext())
-            finalityArray.add(FinalityIterator.next());
     }
 
     public List<DFaNode> getdFaNodes() {
@@ -217,6 +269,14 @@ public class DFA {
         return finalityArray;
     }
 
+    private NFaNode mergeFaPair(NFaPair[] NFaPairArray) throws NFaException {
+        NFaNode headNode=AllManager.nFaNodeManager.newNfaNode();
+        for(NFaPair nFaPair:NFaPairArray){
+            headNode.addEpsilon(nFaPair.getStart());
+        }
+        return headNode;
+    }
+
     //测试打印使用
     public void print(){
         DFaNode head=dFaNodes.get(0);
@@ -225,6 +285,7 @@ public class DFA {
         head.isVisit=true;
         while (!queue.isEmpty()){
             DFaNode dFaNode=queue.poll();
+            dFaNode.isVisit=true;
             if (dFaNode.isIncludeEnd)
                 System.out.println(dFaNode.getIdentification()+"end");
             for (int i=0;i<dFaNode.getEdge().size();++i){

@@ -2,6 +2,9 @@ package ODFA;
 
 import DFA.DFaNode;
 import Lex.AllManager;
+import NFA.NFaNode;
+import mException.DFaException;
+import mException.NFaException;
 
 
 import java.util.*;
@@ -27,15 +30,11 @@ public class ODFA {
 
     private List<DFaNode> DFaNodes;
     private List<Integer> finalityArray;
-    //用来对DFAnode在table表中的通过node的id进行快速定位
-    private Map<Integer,Integer> IndexOfNode;
 
-    public ODFA(List<DFaNode> oldDFaNode, List<Integer> finalityArray){
+    public ODFA(List<DFaNode> oldDFaNode, List<Integer> finalityArray) throws DFaException {
         this.DFaNodes=oldDFaNode;
-        IndexOfNode=new HashMap<>(oldDFaNode.size());
         for (int i=0;i<oldDFaNode.size();++i){
-            IndexOfNode.put(oldDFaNode.get(i).getIdentification(),i);
-            //为了测试
+            //为了测试打印使用
             oldDFaNode.get(i).isVisit=false;
         }
         this.finalityArray=finalityArray;
@@ -53,14 +52,14 @@ public class ODFA {
 
         }
 
-
-        private boolean isEqual(NodeSet nodeSet){
-            if (nodeSet.set.size()!=set.size())
+        //判断param的结点内所有点都在本nodeset中
+        private boolean isInclude(NodeSet nodeSet){
+            if (nodeSet.set.size()>set.size())
                 return false;
 
-            Iterator<DFaNode> iterator=this.set.iterator();
+            Iterator<DFaNode> iterator=nodeSet.set.iterator();
             while (iterator.hasNext()) {
-                if(!nodeSet.set.contains(iterator.next()))
+                if(!set.contains(iterator.next()))
                     return false;
             }
 
@@ -68,7 +67,7 @@ public class ODFA {
         }
     }
 
-    private void optimizeDFA(){
+    private void optimizeDFA() throws DFaException {
         List<NodeSet> allSet=new ArrayList<>();
         //首先将旧的队列，分成两个集合，一个是终结符另一个是不包括终结符的集合
         NodeSet finalSet=new NodeSet(),nofinalSet=new NodeSet();
@@ -96,41 +95,87 @@ public class ODFA {
                 Iterator<DFaNode> k=allSet.get(pos).set.iterator();
                 NodeSet oneEdgeSet=new NodeSet();
 
+                //因为是临时变量，让GC自动回收就够了,用来处理没有对应边时，指向该点，使得结果集是一个全新不存在的
+                DFaNode tempNode=new DFaNode();
                 FindInext:
                 while (k.hasNext()){
                     DFaNode currentNode=k.next();
-                    for(int i=0;i<currentNode.getDfaNodes().size();++i){
-                        if(currentNode.getEdge().get(i)==finalityArray.get(finalEdge)) {
+                    //是否存在这条边
+                    boolean isHaveThisEdge=false;
+
+                    for(int i=0;i<currentNode.getEdge().size();++i){
+                        if(currentNode.getEdge().get(i).equals(finalityArray.get(finalEdge))) {
                             oneEdgeSet.addNode(currentNode.getDfaNodes().get(i));
                             //因为每一个结点的一条有效终结符边只能有一个结果，当找到了就直接开始下一个结点的寻找
+                            isHaveThisEdge=true;
                             continue FindInext;
                         }
                     }
 
+
+                    if (!isHaveThisEdge)
+                        oneEdgeSet.addNode(tempNode);
+
                 }
 
-                //判断该NodeSet是否存在过
-                int isIncluded=-1;
+                //判断该NodeSet是否存在在一个完整结点中
+                boolean isIncluded=false;
+                for (NodeSet nodeSet:allSet)
+                    if (nodeSet.isInclude(oneEdgeSet)) {
+                        isIncluded = true;
+                        break ;
+                    }
+
+                //如果该nodeSet全都是构造新的结点则跳过
+                int num=0;
+                for (DFaNode dFaNode:oneEdgeSet.set){
+                    if (dFaNode==tempNode)
+                        num++;
+                }
+                if (num==oneEdgeSet.set.size())
+                    break FindISetNextEdge;
+
+
+                /*
                 FindIsIncluded:
                 for (DFaNode dFaNode:oneEdgeSet.set){
-                    for (int i=0;i<allSet.size();++i)
-                        if (allSet.get(i).set.contains(dFaNode))
-                            if (isIncluded==-1)
-                                isIncluded=i;
-                            else if(isIncluded!=i){
-                                isIncluded=-2;
+                    //假设只有一个无边结点
+                    if (dFaNode==tempNode){
+                        isIncluded=-2;
+                        break FindIsIncluded;
+                    }
+                    for (int i=0;i<allSet.size();++i) {
+                        if (allSet.get(i).set.contains(dFaNode)) {
+                            if (isIncluded == -1)
+                                isIncluded = i;
+                            else if (isIncluded != i) {
+                                isIncluded = -2;
                                 break FindIsIncluded;
                             }
+                        }
+                    }
                 }
+                //如果全都是无该边则不用拆分
+                int num=0;
+                for (DFaNode dFaNode:oneEdgeSet.set){
+                    if (dFaNode==tempNode)
+                        num++;
+                }
+                if (num==oneEdgeSet.set.size())
+                    break FindISetNextEdge;
 
-                if (isIncluded!=-2)
+                */
+
+                if (isIncluded)
                     continue FindISetNextEdge;
                 else {//需要将这个NodeSet进行不同集合划分成几个集合的形式
-                    NodeSet[] nodeSets=new NodeSet[allSet.size()];
+                    NodeSet[] nodeSets=new NodeSet[allSet.size()+1];
                     for (DFaNode I:allSet.get(pos).set){
+                        boolean isHaveThisEdge=false;
                         FindwitchSet:
                         for(int i=0;i<I.getEdge().size();++i){
-                            if(I.getEdge().get(i)==finalityArray.get(finalEdge)) {
+                            if(I.getEdge().get(i).equals(finalityArray.get(finalEdge))) {
+                                isHaveThisEdge=true;
                                 //table定位
                                 for(int indexOfSet=0;indexOfSet<allSet.size();++indexOfSet){
                                     if(allSet.get(indexOfSet).set.contains(I.getDfaNodes().get(i))){
@@ -141,6 +186,11 @@ public class ODFA {
                                     }
                                 }
                             }
+                        }
+                        if (!isHaveThisEdge){
+                            if (nodeSets[allSet.size()]==null)
+                                nodeSets[allSet.size()]=new NodeSet();
+                            nodeSets[allSet.size()].set.add(I);
                         }
 
                     }
@@ -177,6 +227,9 @@ public class ODFA {
             //删除保留结点除外的结点
             while (iterator.hasNext()){
                 DFaNode deleteNode=iterator.next();
+                //同时更新当前endlevel，如果集合中存在end等级更高的替换当前代表结点的等级
+                if (deleteNode.getEndLevel()<represent.getEndLevel())
+                    represent.setEndLevel(deleteNode.getEndLevel());
                 DFaNodes.remove(deleteNode);
                 AllManager.dFaNodeManager.deleteNfaNode(deleteNode);
             }

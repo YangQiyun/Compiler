@@ -114,7 +114,7 @@ public class NFA {
             if (pairStack.isEmpty())
                 throw new NFaException("单目运算符前无可用pair");
             NFaPair frontPair=pairStack.pop();
-            if(((ClassifierNode) node).getClassType()== ClassifierNode.CTYPE.QUESTION){
+            if(((ClassifierNode) node).getClassType()== ClassifierNode.CTYPE.ADD){
                 newPair.getStart().addEpsilon(frontPair.getStart());
                 frontPair.getEnd().addEpsilon(frontPair.getStart());
                 frontPair.getEnd().addEpsilon(newPair.getEnd());
@@ -125,7 +125,7 @@ public class NFA {
                 frontPair.getEnd().addEpsilon(newPair.getEnd());
                 newPair.getStart().addEpsilon(newPair.getEnd());
             }
-            if(((ClassifierNode) node).getClassType()== ClassifierNode.CTYPE.ADD){
+            if(((ClassifierNode) node).getClassType()== ClassifierNode.CTYPE.QUESTION){
                 newPair.getStart().addEpsilon(frontPair.getStart());
                 frontPair.getEnd().addEpsilon(newPair.getEnd());
                 newPair.getStart().addEpsilon(newPair.getEnd());
@@ -151,4 +151,9 @@ public class NFA {
         return  newPair;
     }
 
+
+    //设置当前NFA的endlevel等级
+    public void SetEndLevel(int level){
+        this.resultPair.setEndLevel(level);
+    }
 }

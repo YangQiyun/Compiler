@@ -15,6 +15,8 @@ import java.util.concurrent.LinkedTransferQueue;
  */
 public class NFaPair {
 
+    //结束结点的等级，等级相当于书写正则表达式的行号，越前则等级越高，所以数值越小等级越大
+    private int endLevel=Integer.MAX_VALUE;
     private NFaNode start;
     private NFaNode end;
 
@@ -39,7 +41,13 @@ public class NFaPair {
         this.end = end;
     }
 
+    public int getEndLevel() {
+        return endLevel;
+    }
 
+    public void setEndLevel(int endLevel) {
+        this.endLevel = endLevel;
+    }
 
     /**
      * 测试用的函数，广度优先打印出NFA的连接情况，如：
