@@ -3,6 +3,7 @@ package ODFA;
 import DFA.DFaNode;
 import Lex.AllManager;
 import NFA.NFaNode;
+import Node.Node;
 import mException.DFaException;
 import mException.NFaException;
 
@@ -72,11 +73,9 @@ public class ODFA {
         //首先将旧的队列，分成两个集合，一个是终结符另一个是不包括终结符的集合
         NodeSet finalSet=new NodeSet(),nofinalSet=new NodeSet();
         for(DFaNode contentNode:DFaNodes)
-            if (contentNode.isIncludeEnd)
-                finalSet.addNode(contentNode);
-            else
+            if (!contentNode.isIncludeEnd)
                 nofinalSet.addNode(contentNode);
-        allSet.add(finalSet);
+        //这里将所有终结符拆分,等到非终结符部分优化完成再加入，是因为优化结果处理没有考虑明白，详细请见龙书116的例3.41处理问题方式
         allSet.add(nofinalSet);
 
         //标记是否所有的nodeset都是无法再分割的了,当该值等于所有子集数时表示完成
@@ -206,6 +205,14 @@ public class ODFA {
             }
             pos++;
         }
+
+        //非终结符部分优化完成
+        for(DFaNode contentNode:DFaNodes)
+            if (!contentNode.isIncludeEnd){
+            NodeSet nodeSet=new NodeSet();
+            nodeSet.set.add(contentNode);
+            allSet.add(nodeSet);
+            }
 
         //对于每一个集合，只保留第一个dfaNode,注意此时应该重置集合内边的关系
         for (NodeSet currentSet:allSet){
