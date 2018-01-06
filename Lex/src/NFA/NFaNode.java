@@ -86,6 +86,8 @@ public class NFaNode {
      * 清除结点的所有状态
      */
     public void clearState(){
+        //使得每一个“新”的结点都是新的id
+        identification=index++;
         if(edge!=null)
         edge.clear();
         if(nfaNodes!=null)

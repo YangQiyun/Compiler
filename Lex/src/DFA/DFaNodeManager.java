@@ -61,6 +61,7 @@ public class DFaNodeManager {
      * @param  dFaNode 不需要的结点
      */
     public void deleteNfaNode(DFaNode dFaNode){
+
         oldDFaStack.push(dFaNode);
     }
 }

@@ -32,10 +32,7 @@ public class DFA {
     private NFaPair[] nFaPairArray;
     //当前NFA图中的存在的所有终结符的边
     private List<Integer> finalityArray=new ArrayList<>();
-    //终结符和table表位置定位使用，为了可能节省的不存在的终结符在table表的位置，如果终结符都用到可能效率不会很高
-    private int[] finalInTable=new int[128];
-    //先鉴别出来的终结符排在table表的靠前位置
-    private int tableLocation=0;
+
     //DFaNode 和 Closure一一对应
     private List<DFaNode> dFaNodes=new ArrayList<>();
     private List<Closure> closures=new ArrayList<>();
@@ -245,12 +242,7 @@ public class DFA {
                 for (int i=0;i<node.edgeSize();i++) {
                     int currentEdge=node.getEdge().get(i);
                     if(currentEdge!=-1) {
-                        //注意只有当终结符没有被录入时才进行
-                        if(finalInTable[currentEdge]==0){
-                            finalInTable[currentEdge]=tableLocation++;
                             finalityArray.add(currentEdge);
-                        }
-
                     }
                     if(!node.getNfaNodes().get(i).isVisit){
                         queue.add(node.getNfaNodes().get(i));

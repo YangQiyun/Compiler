@@ -35,7 +35,7 @@ public class ODFA {
     public ODFA(List<DFaNode> oldDFaNode, List<Integer> finalityArray) throws DFaException {
         this.DFaNodes=oldDFaNode;
         for (int i=0;i<oldDFaNode.size();++i){
-            //为了测试打印使用
+            //为了测试打印，同时为table的构建初始化使用
             oldDFaNode.get(i).isVisit=false;
         }
         this.finalityArray=finalityArray;
@@ -227,6 +227,7 @@ public class ODFA {
                     represent.getDfaNodes().set(i,represent);
             //将指向集合内其他点的node指向自己
             for (DFaNode anotherNode:DFaNodes){
+                if (anotherNode.getDfaNodes()!=null)
                 for (int i=0;i<anotherNode.getDfaNodes().size();++i)
                     if(currentSet.set.contains(anotherNode.getDfaNodes().get(i)))
                         anotherNode.getDfaNodes().set(i,represent);
@@ -244,6 +245,9 @@ public class ODFA {
         }
     }
 
+    public DFaNode getHead(){
+        return DFaNodes.get(0);
+    }
 
     //测试打印使用
     public void print(){
@@ -255,7 +259,7 @@ public class ODFA {
         while (!queue.isEmpty()){
             DFaNode dFaNode=queue.poll();
             if (dFaNode.isIncludeEnd)
-                System.out.println(dFaNode.getIdentification()+"end");
+                System.out.println(dFaNode.getIdentification()+"end"+dFaNode.getEndLevel());
             for (int i=0;i<dFaNode.getEdge().size();++i){
                 System.out.println("[ "+dFaNode.getIdentification()+"----"+(char)(int)dFaNode.getEdge().get(i)+"----"+dFaNode.getDfaNodes().get(i).getIdentification()+"]");
                 if(!dFaNode.getDfaNodes().get(i).isVisit){

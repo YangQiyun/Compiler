@@ -2,6 +2,7 @@ package Regex;
 
 
 import DFA.DFA;
+import Lex.Scan;
 import NFA.*;
 import ODFA.ODFA;
 import mException.ShuntingException;
@@ -139,7 +140,7 @@ public class NormalRegex {
             odfa.print();
 */
             //表达式一
-            NormalRegex normalRegex1=new NormalRegex("a");
+            NormalRegex normalRegex1=new NormalRegex("if|(0|1|2|3|4|5|6|7|8|9)*|orp");
             Shunting_yard shunting_yard1=new Shunting_yard(normalRegex1.getNodeList(),AllManager.operatorManager);
             abstractGrammarTree abstractGrammarTree1=new abstractGrammarTree(shunting_yard1.getResult());
             NFA nfa1=new NFA(abstractGrammarTree1.getHeadNode());
@@ -147,14 +148,14 @@ public class NormalRegex {
 
 
             //表达式二
-            NormalRegex normalRegex2=new NormalRegex("abb");
+            NormalRegex normalRegex2=new NormalRegex("or|abo");
             Shunting_yard shunting_yard2=new Shunting_yard(normalRegex2.getNodeList(),AllManager.operatorManager);
             abstractGrammarTree abstractGrammarTree2=new abstractGrammarTree(shunting_yard2.getResult());
             NFA nfa2=new NFA(abstractGrammarTree2.getHeadNode());
             nfa2.SetEndLevel(2);
 
             //表达式三
-            NormalRegex normalRegex3=new NormalRegex("a*b+");
+            NormalRegex normalRegex3=new NormalRegex("(a|c|b|f|i|o|r)*f");
             Shunting_yard shunting_yard3=new Shunting_yard(normalRegex3.getNodeList(),AllManager.operatorManager);
             abstractGrammarTree abstractGrammarTree3=new abstractGrammarTree(shunting_yard3.getResult());
             NFA nfa3=new NFA(abstractGrammarTree3.getHeadNode());
@@ -165,9 +166,11 @@ public class NormalRegex {
             DFA dfa1=new DFA(nFaPairs);
            // dfa1.print();
 
-            ODFA odfa1=new ODFA(dfa1.getdFaNodes(),dfa1.getFinalityArray());
+            //ODFA odfa1=new ODFA(dfa1.getdFaNodes(),dfa1.getFinalityArray());
 
-            odfa1.print();
+            Scan scan=new Scan(dfa1.getdFaNodes().get(0));
+            scan.setValue("orp");
+            //odfa1.print();
         } catch (ShuntingException e) {
             e.printStackTrace();
         } catch (Exception e) {
