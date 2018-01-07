@@ -13,6 +13,8 @@ import java.util.concurrent.LinkedTransferQueue;
 
 
 /**
+ * 该类需要重写，实验结果不行
+ *
  * 实验算法：
 
  1，  对于DFA的字母表M，把M划分成终态集和非终态集，令P=M。
@@ -113,10 +115,11 @@ public class ODFA {
 
 
                     if (!isHaveThisEdge)
-                        oneEdgeSet.addNode(tempNode);
+                        oneEdgeSet.addNode(currentNode);
 
                 }
 
+                /*
                 //判断该NodeSet是否存在在一个完整结点中
                 boolean isIncluded=false;
                 for (NodeSet nodeSet:allSet)
@@ -133,16 +136,17 @@ public class ODFA {
                 }
                 if (num==oneEdgeSet.set.size())
                     break FindISetNextEdge;
+*/
 
-
-                /*
+                int isIncluded=-1;
                 FindIsIncluded:
                 for (DFaNode dFaNode:oneEdgeSet.set){
                     //假设只有一个无边结点
+                   /*
                     if (dFaNode==tempNode){
                         isIncluded=-2;
                         break FindIsIncluded;
-                    }
+                    }*/
                     for (int i=0;i<allSet.size();++i) {
                         if (allSet.get(i).set.contains(dFaNode)) {
                             if (isIncluded == -1)
@@ -154,7 +158,9 @@ public class ODFA {
                         }
                     }
                 }
-                //如果全都是无该边则不用拆分
+                //如果全都是无该边则不用拆分*
+                //
+                 /*
                 int num=0;
                 for (DFaNode dFaNode:oneEdgeSet.set){
                     if (dFaNode==tempNode)
@@ -165,7 +171,7 @@ public class ODFA {
 
                 */
 
-                if (isIncluded)
+                if (isIncluded!=-2)
                     continue FindISetNextEdge;
                 else {//需要将这个NodeSet进行不同集合划分成几个集合的形式
                     NodeSet[] nodeSets=new NodeSet[allSet.size()+1];
@@ -216,6 +222,7 @@ public class ODFA {
 
         //对于每一个集合，只保留第一个dfaNode,注意此时应该重置集合内边的关系
         for (NodeSet currentSet:allSet){
+             /*
             //只有一个就跳过
             if(currentSet.set.size()==1)
                 continue;
@@ -232,6 +239,19 @@ public class ODFA {
                     if(currentSet.set.contains(anotherNode.getDfaNodes().get(i)))
                         anotherNode.getDfaNodes().set(i,represent);
             }
+            */
+            Iterator<DFaNode> iterator=currentSet.set.iterator();
+            DFaNode represent=iterator.next();
+            for (int i=0;i<represent.getDfaNodes().size();++i){
+                DFaNode nextNode=represent.getDfaNodes().get(i);
+                for (NodeSet whichSet:allSet){
+                    if (whichSet.set.contains(nextNode)){
+                        represent.getDfaNodes().set(i,whichSet.set.iterator().next());
+                        break;
+                    }
+                }
+            }
+
             //删除保留结点除外的结点
             while (iterator.hasNext()){
                 DFaNode deleteNode=iterator.next();

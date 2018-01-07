@@ -1,12 +1,6 @@
 package Regex;
 
 
-import DFA.DFA;
-import Lex.Scan;
-import NFA.*;
-import ODFA.ODFA;
-import mException.ShuntingException;
-import Lex.AllManager;
 import Node.*;
 
 import java.util.ArrayList;
@@ -19,8 +13,6 @@ import java.util.List;
  * @author Mind
  * @version 1.0
  */
-
-
 
 public class NormalRegex {
 
@@ -57,7 +49,7 @@ public class NormalRegex {
         Character content;
         boolean isCouldCat=false;
 
-        while (pos!=infixRegex.length()){
+        while (pos<infixRegex.length()){
 
             content=infixRegex.charAt(pos++);
 
@@ -115,68 +107,5 @@ public class NormalRegex {
         return nodeList;
     }
 
-    public static void main(String args[]){
-        //(a|b)*abb(a|b)*
-        //((c|a)b*)*
-        //(a*|b*)*
-        //(a|b)*abb
-        try {
-/*
-        NormalRegex normalRegex=new NormalRegex("(a|b)*abb");
-        //normalRegex.print();
-       // System.out.println();
-        Shunting_yard shunting_yard= null;
-
-            shunting_yard = new Shunting_yard(normalRegex.getNodeList(), AllManager.operatorManager);
-            shunting_yard.print();
-            System.out.println(" tree");
-            abstractGrammarTree abstractGrammarTree=new abstractGrammarTree(shunting_yard.getResult());
-            abstractGrammarTree.WidthPrint();
-            NFA nfa=new NFA(abstractGrammarTree.getHeadNode());
-            //nfa.getResultPair().print();
-            DFA dfa=new DFA(nfa.getResultPair());
-            //dfa.print();
-            ODFA odfa=new ODFA(dfa.getdFaNodes(),dfa.getFinalityArray());
-            odfa.print();
-*/
-            //表达式一
-            NormalRegex normalRegex1=new NormalRegex("if|(0|1|2|3|4|5|6|7|8|9)*|orp");
-            Shunting_yard shunting_yard1=new Shunting_yard(normalRegex1.getNodeList(),AllManager.operatorManager);
-            abstractGrammarTree abstractGrammarTree1=new abstractGrammarTree(shunting_yard1.getResult());
-            NFA nfa1=new NFA(abstractGrammarTree1.getHeadNode());
-            nfa1.SetEndLevel(1);
-
-
-            //表达式二
-            NormalRegex normalRegex2=new NormalRegex("or|abo");
-            Shunting_yard shunting_yard2=new Shunting_yard(normalRegex2.getNodeList(),AllManager.operatorManager);
-            abstractGrammarTree abstractGrammarTree2=new abstractGrammarTree(shunting_yard2.getResult());
-            NFA nfa2=new NFA(abstractGrammarTree2.getHeadNode());
-            nfa2.SetEndLevel(2);
-
-            //表达式三
-            NormalRegex normalRegex3=new NormalRegex("(a|c|b|f|i|o|r)*f");
-            Shunting_yard shunting_yard3=new Shunting_yard(normalRegex3.getNodeList(),AllManager.operatorManager);
-            abstractGrammarTree abstractGrammarTree3=new abstractGrammarTree(shunting_yard3.getResult());
-            NFA nfa3=new NFA(abstractGrammarTree3.getHeadNode());
-            nfa3.SetEndLevel(3);
-
-            NFaPair[] nFaPairs={nfa1.getResultPair(),nfa2.getResultPair(),nfa3.getResultPair()};
-
-            DFA dfa1=new DFA(nFaPairs);
-           // dfa1.print();
-
-            //ODFA odfa1=new ODFA(dfa1.getdFaNodes(),dfa1.getFinalityArray());
-
-            Scan scan=new Scan(dfa1.getdFaNodes().get(0));
-            scan.setValue("orp");
-            //odfa1.print();
-        } catch (ShuntingException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }
