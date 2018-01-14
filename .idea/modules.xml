@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Compiler.iml" filepath="$PROJECT_DIR$/Compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lex/Lex.iml" filepath="$PROJECT_DIR$/Lex/Lex.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Yacc/Yacc.iml" filepath="$PROJECT_DIR$/Yacc/Yacc.iml" />
     </modules>
   </component>
 </project>
