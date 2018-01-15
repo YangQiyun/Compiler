@@ -64,7 +64,9 @@ public class Scan {
         NFaPair[] nFaPairs={nFaPair1,nFaPair2,nFaPair3,nFaPair4};*/
         NFaPair[] t=new NFaPair[nFaPairs.size()];
         DFA dfa=new DFA(nFaPairs.toArray(t));
-        Table=new Table(dfa.getdFaNodes().get(0));
+        ODFA odfa=new ODFA(dfa.getdFaNodes(),dfa.getFinalityArray());
+        //Table=new Table(dfa.getdFaNodes().get(0));
+        Table=new Table(odfa.getHead());
         table=Table.getTable();
         isEndNode=Table.getIsEndNode();
     }
