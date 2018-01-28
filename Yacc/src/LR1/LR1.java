@@ -63,16 +63,22 @@ public class LR1 {
         FIRST();
         ALLI();
         createTable();
-        Token id=new Token("c",true);
-        id.setId(allTokens.get("c").getId());
-        Token add=new Token("d",true);
-        add.setId(allTokens.get("d").getId());
-        Token mutil=new Token("C",true);
-        mutil.setId(allTokens.get("C").getId());
+        Token c=new Token("i",true);
+        c.setId(allTokens.get("i").getId());
+        Token d=new Token("a",true);
+        d.setId(allTokens.get("a").getId());
+        Token a=new Token("e",true);
+        a.setId(allTokens.get("e").getId());
+        Token b=new Token(";",true);
+        b.setId(allTokens.get(";").getId());
         ArrayList<Token> mtest=new ArrayList<>();
-        mtest.add(id);
-        mtest.add(add);
-        mtest.add(add);
+        mtest.add(c);
+        mtest.add(d);
+        mtest.add(a);
+        mtest.add(d);
+        mtest.add(b);
+        mtest.add(c);
+        mtest.add(d);
         mtest.add(Token.END_OF_FILE);
         analyse(mtest);
 
@@ -338,9 +344,35 @@ public class LR1 {
                             continue ;
                         }
                         if (result.get(firstToken.getValue()) != null) {
-                            for (Token temp : result.get(firstToken.getValue())) {
-                                result.get(currentToken.getValue()).add(temp);
-                            }
+                            //还需要多一步进行是否都由非终结符构成，并且都能推出ε，最后将ε加入到集合中
+                            boolean includeε=false;
+                            Token followToken=firstToken;
+                            int nextToken=2;
+                            do{
+                                includeε=false;
+
+                                for (Token temp : result.get(followToken.getValue())) {
+                                    if (temp.getValue().equals("ε"))
+                                        includeε=true;
+                                    else
+                                        result.get(currentToken.getValue()).add(temp);
+                                }
+                                if (includeε){
+                                    //所有非终结符都由ε，才加入ε
+                                    if (nextToken==productions.get(everyProduction).getSize())
+                                        result.get(currentToken.getValue()).add(new Token("ε",true));
+                                    else
+                                        followToken=productions.get(everyProduction).get(nextToken++);
+                                }
+                                if (result.get(followToken.getValue())==null){
+                                    //如果没有处理过，优先处理，加入link，同时清除当前token的所有已处理的结果
+                                    settleList.addFirst(followToken);
+                                    result.put(currentToken.getValue(), null);
+                                    continue FIRST;
+                                }
+
+                            }while (includeε);
+
                         } else {//如果没有处理过，优先处理，加入link，同时清除当前token的所有已处理的结果
                             settleList.addFirst(firstToken);
                             result.put(currentToken.getValue(), null);
@@ -437,10 +469,15 @@ public class LR1 {
                     a = iterator.next();
                 } else if (Table_Action[s][a.getId()] < 0) {//归约
 
+                    System.out.print(productions.get(-Table_Action[s][a.getId()] - SPECIAL).get(0).getValue()+" -> ");
+
                     for (int i = 0; i < productions.get(-Table_Action[s][a.getId()] - SPECIAL).getSize() - 1; ++i){
                         symbol.pop();
                         stack.pop();
+                        System.out.print(productions.get(-Table_Action[s][a.getId()] - SPECIAL).get(i+1).getValue());
                     }
+
+                    System.out.println();
 
                     symbol.push(productions.get(-Table_Action[s][a.getId()] - SPECIAL).get(0));
                     int t = stack.peek();

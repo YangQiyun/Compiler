@@ -9,7 +9,6 @@ import java.io.Reader;
  * 继承Reader,主要功能是是为了实现从窗口中获取字符流
  *
  *
- *
  * @author Mind
  * @version 1.0
  */
